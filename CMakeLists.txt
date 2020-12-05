@@ -395,4 +395,4 @@ if(EMSCRIPTEN)
   install(TARGETS binaryen_js DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
 
-configure_file(scripts/binaryen-lit.in ${CMAKE_INSTALL_BINDIR}/binaryen-lit @ONLY)
+configure_file(scripts/binaryen-lit.in ${CMAKE_BINARY_DIR}/binaryen-lit @ONLY)
