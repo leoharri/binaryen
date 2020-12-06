@@ -1438,6 +1438,7 @@ public:
       }
     }
     (*data)[curr->index] = setValue;
+    return Flow();
   }
   Flow visitArrayNew(ArrayNew* curr) {
     NOTE_ENTER("ArrayNew");

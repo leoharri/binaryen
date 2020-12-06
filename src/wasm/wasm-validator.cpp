@@ -2231,10 +2231,10 @@ void FunctionValidator::visitStructGet(StructGet* curr) {
   shouldBeTrue(getModule()->features.hasGC(),
                curr,
                "struct.get requires gc to be enabled");
-  if (curr->value->type != Type::unreachable) {
+  if (curr->ref->type != Type::unreachable) {
     shouldBeEqual(
       curr->type,
-      curr->value->type.getHeapType().getStruct().fields[curr->index].type,
+      curr->ref->type.getHeapType().getStruct().fields[curr->index].type,
       curr,
       "struct.get must have the proper type");
   }
@@ -2244,7 +2244,13 @@ void FunctionValidator::visitStructSet(StructSet* curr) {
   shouldBeTrue(getModule()->features.hasGC(),
                curr,
                "struct.set requires gc to be enabled");
-  WASM_UNREACHABLE("TODO (gc): struct.set");
+  if (curr->ref->type != Type::unreachable) {
+    shouldBeEqual(
+      curr->value->type,
+      curr->ref->type.getHeapType().getStruct().fields[curr->index].type,
+      curr,
+      "struct.set must have the proper type");
+  }
 }
 
 void FunctionValidator::visitArrayNew(ArrayNew* curr) {

@@ -2149,7 +2149,6 @@ Expression* SExpressionWasmBuilder::makeStructGet(Element& s, bool signed_) {
 Expression* SExpressionWasmBuilder::makeStructSet(Element& s) {
   auto structType = parseHeapType(*s[1]);
   auto index = getStructIndex(structType, *s[2]);
-  auto type = structType.getStruct().fields[index].type;
   auto ref = parseExpression(*s[3]);
   auto value = parseExpression(*s[4]);
   return Builder(wasm).makeStructSet(index, ref, value);
