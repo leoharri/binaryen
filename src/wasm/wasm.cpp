@@ -1092,7 +1092,14 @@ void StructGet::finalize() {
   }
 }
 
-// TODO (gc): struct.set
+void StructSet::finalize() {
+  if (value->type == Type::unreachable) {
+    type = Type::unreachable;
+  } else {
+    type = none;
+  }
+}
+
 // TODO (gc): array.new
 // TODO (gc): array.get
 // TODO (gc): array.set
