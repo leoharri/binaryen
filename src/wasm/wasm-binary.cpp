@@ -5645,8 +5645,8 @@ bool WasmBinaryBuilder::maybeVisitStructSet(Expression*& out, uint32_t code) {
   auto* curr = allocator.alloc<StructSet>();
   auto type = getHeapType();
   curr->index = getU32LEB();
-  curr->value = popNonVoidExpression();
   curr->ref = popNonVoidExpression();
+  curr->value = popNonVoidExpression();
   curr->finalize();
   out = curr;
   return true;
